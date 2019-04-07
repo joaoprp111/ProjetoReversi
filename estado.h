@@ -28,15 +28,22 @@ typedef struct estado {
 } ESTADO;
 
 
-void printa(ESTADO e);
-ESTADO alteraEstado(ESTADO e, char *r);
-void jogada(int l,int c,ESTADO e);
-void comandos();
-int validaVert(int l,int c,ESTADO e);
-int validaHoriz(int l,int c,ESTADO e);
-int validaDiP(int l,int c,ESTADO e);
-int validaDiS(int l,int c,ESTADO e);
-int valida(int l,int c,ESTADO e);
+void printa(ESTADO *e);
+void alteraEstado(ESTADO *e, char *r);
+void jogada(int l,int c,ESTADO *e);
+int validaVertC(int l,int c,ESTADO *e);
+int validaVertB(int l,int c,ESTADO *e);
+int validaVert(int l,int c,ESTADO *e);
+int validaHorizE(int l,int c,ESTADO *e);
+int validaHorizD(int l,int c,ESTADO *e);
+int validaHoriz(int l,int c,ESTADO *e);
+int validaDiPS(int l,int c,ESTADO *e);
+int validaDiPI(int l,int c,ESTADO *e);
+int validaDiP(int l,int c,ESTADO *e);
+int validaDiSS(int l,int c,ESTADO *e);
+int validaDiSI(int l,int c,ESTADO *e);
+int validaDiS(int l,int c,ESTADO *e);
+int valida(int l,int c,ESTADO *e);
 
 
 #endif //PROJ_ESTADO_H

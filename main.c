@@ -14,7 +14,7 @@ int main()
     e.grelha[3][3] = VALOR_O;
     e.grelha[4][4] = VALOR_O;
     //printf("%d",valida(3,5,e));
-    comandos();
-    while (read[0]!='Q') {alteraEstado(e,read);if (e.peca==VALOR_O) printf("O");}
+    printf("Comece um novo jogo!\n");
+    while (read[0]!='Q') alteraEstado(&e,read);
     return 0;
 }
