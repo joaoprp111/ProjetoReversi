@@ -7,12 +7,12 @@
 int validaVertC(int l,int c,ESTADO *e) {
     int i,j=l-1,foundPeca=0,livreC=1;
     if (j - 1 < 0) livreC = 0;
-    else if (e->grelha[j - 1][c - 1] == VAZIA || e->grelha[j - 1][c - 1] == e->peca) livreC = 0;
-    i = j - 2;
+    else if (e->grelha[j-1][c-1]==VAZIA || e->grelha[j-1][c-1]==PONTO || e->grelha[j-1][c-1]==e->peca) livreC = 0;
+    i=j-2;
     if (i < 0) livreC = 0;
     while (i >= 0 && livreC && !foundPeca) {
-        if (e->grelha[i][c - 1] == VAZIA) livreC = 0;
-        if (e->grelha[i][c - 1] == e->peca) foundPeca = 1;
+        if (e->grelha[i][c-1]==VAZIA || e->grelha[i][c-1]==PONTO) livreC = 0;
+        if (e->grelha[i][c-1]==e->peca) foundPeca = 1;
         i--;
     }
     return livreC;
@@ -21,11 +21,11 @@ int validaVertC(int l,int c,ESTADO *e) {
 int validaVertB(int l,int c,ESTADO *e){
     int foundPeca=0,j=l-1,i,livreB=1;
     if (j+1>=8) livreB = 0;
-    else if (e->grelha[j+1][c-1]==VAZIA || e->grelha[j+1][c-1]==e->peca) livreB=0;
+    else if (e->grelha[j+1][c-1]==VAZIA || e->grelha[j+1][c-1]==PONTO || e->grelha[j+1][c-1]==e->peca) livreB=0;
     i=j+2;
     if (i>=8) livreB=0;
     while (i<8 && livreB && !foundPeca) {
-        if (e->grelha[i][c-1]==VAZIA) livreB=0;
+        if (e->grelha[i][c-1]==VAZIA || e->grelha[i][c-1]==PONTO) livreB=0;
         if (e->grelha[i][c-1]==e->peca) foundPeca=1;
         i++;
     }
@@ -44,11 +44,11 @@ int validaVert (int l,int c,ESTADO *e) {
 int validaHorizE(int l,int c,ESTADO *e){
     int i,j=c-1,livreE=1,foundPeca=0;
     if (j-1<0) livreE=0;
-    else if (e->grelha[l-1][j-1]==VAZIA || e->grelha[l-1][j-1]==e->peca) livreE=0;
+    else if (e->grelha[l-1][j-1]==VAZIA || e->grelha[l-1][j-1]==PONTO || e->grelha[l-1][j-1]==e->peca) livreE=0;
     i=j-2;
     if (i<0) livreE=0;
     while (i>=0 && livreE && !foundPeca){
-        if (e->grelha[l-1][i]==VAZIA) livreE=0;
+        if (e->grelha[l-1][i]==VAZIA || e->grelha[l-1][i]==PONTO) livreE=0;
         if (e->grelha[l-1][i]==e->peca) foundPeca=1;
         i--;
     }
@@ -58,11 +58,11 @@ int validaHorizE(int l,int c,ESTADO *e){
 int validaHorizD(int l,int c,ESTADO *e){
     int i,j=c-1,foundPeca=0,livreD=1;
     if (j+1>=8) livreD = 0;
-    else if (e->grelha[l-1][j+1]==VAZIA || e->grelha[l-1][j+1]==e->peca) livreD=0;
+    else if (e->grelha[l-1][j+1]==VAZIA || e->grelha[l-1][j+1]==PONTO || e->grelha[l-1][j+1]==e->peca) livreD=0;
     i=j+2;
     if (i>=8) livreD=0;
     while (i<8 && livreD && !foundPeca) {
-        if (e->grelha[l-1][i]==VAZIA) livreD=0;
+        if (e->grelha[l-1][i]==VAZIA || e->grelha[l-1][i]==PONTO) livreD=0;
         if (e->grelha[l-1][i]==e->peca) foundPeca=1;
         i++;
     }
@@ -79,11 +79,11 @@ int validaHoriz (int l,int c,ESTADO *e){
 int validaDiPS(int l,int c,ESTADO *e){
     int i,j,jl=l-1,jc=c-1,foundPeca=0,livreS=1;
     if (jl-1<0 || jc-1<0) livreS=0;
-    else if (e->grelha[jl-1][jc-1]==VAZIA || e->grelha[jl-1][jc-1]==e->peca) livreS=0;
+    else if (e->grelha[jl-1][jc-1]==VAZIA || e->grelha[jl-1][jc-1]==PONTO || e->grelha[jl-1][jc-1]==e->peca) livreS=0;
     i=jl-2; j=jc-2;
     if (i<0 || j<0) livreS=0;
     while (i>=0 && j>=0 && livreS && !foundPeca){
-        if (e->grelha[i][j]==VAZIA) livreS=0;
+        if (e->grelha[i][j]==VAZIA || e->grelha[i][j]==PONTO) livreS=0;
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i--;j--;
     }
@@ -93,10 +93,10 @@ int validaDiPS(int l,int c,ESTADO *e){
 int validaDiPI(int l,int c,ESTADO *e){
     int i,j,jl=l-1,jc=c-1,foundPeca=0,livreI=1;
     if (jl+1>=8 || jc+1>=8) livreI=0;
-    else if(e->grelha[jl+1][jc+1]==VAZIA || e->grelha[jl+1][jc+1]==e->peca) livreI=0;
+    else if(e->grelha[jl+1][jc+1]==VAZIA || e->grelha[jl+1][jc+1]==PONTO || e->grelha[jl+1][jc+1]==e->peca) livreI=0;
     i=jl+2;j=jc+2;
     while (i<8 && j<8 && livreI && !foundPeca){
-        if (e->grelha[i][j]==VAZIA) livreI=0;
+        if (e->grelha[i][j]==VAZIA || e->grelha[i][j]==PONTO) livreI=0;
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i++;j++;
     }
@@ -113,11 +113,11 @@ int validaDiP(int l,int c,ESTADO *e){
 int validaDiSS(int l,int c,ESTADO *e){
     int i,j,jl=l-1,jc=c-1,foundPeca=0,livreS=1;
     if (jl-1<0 || jc+1>=8) livreS=0;
-    else if (e->grelha[jl-1][jc+1]==VAZIA || e->grelha[jl-1][jc+1]==e->peca) livreS=0;
+    else if (e->grelha[jl-1][jc+1]==VAZIA || e->grelha[jl-1][jc+1]==PONTO || e->grelha[jl-1][jc+1]==e->peca) livreS=0;
     i=jl-2; j=jc+2;
     if (i<0 || j>=8) livreS=0;
     while (i>=0 && j<8 && livreS && !foundPeca){
-        if (e->grelha[i][j]==VAZIA) livreS=0;
+        if (e->grelha[i][j]==VAZIA || e->grelha[i][j]==PONTO) livreS=0;
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i--;j++;
     }
@@ -127,10 +127,10 @@ int validaDiSS(int l,int c,ESTADO *e){
 int validaDiSI(int l,int c,ESTADO *e){
     int i,j,jl=l-1,jc=c-1,livreI=1,foundPeca=0;
     if (jl+1>=8 || jc-1<0) livreI=0;
-    else if(e->grelha[jl+1][jc-1]==VAZIA || e->grelha[jl+1][jc-1]==e->peca) livreI=0;
+    else if(e->grelha[jl+1][jc-1]==VAZIA || e->grelha[jl+1][jc-1]==PONTO || e->grelha[jl+1][jc-1]==e->peca) livreI=0;
     i=jl+2;j=jc-2;
     while (i<8 && j>=0 && livreI && !foundPeca){
-        if (e->grelha[i][j]==VAZIA) livreI=0;
+        if (e->grelha[i][j]==VAZIA || e->grelha[i][j]==PONTO) livreI=0;
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i++;j--;
     }
@@ -155,13 +155,13 @@ void virapecas(int l,int c,ESTADO *e){
     int i,j;
     if (validaDiS(l,c,e)) {
         if (validaDiSS(l,c,e)) {
-            for(i=l-2,j=c;i>=0 && j<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;i--,j++) {
+            for(i=l-2,j=c;i>=0 && j<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i--,j++) {
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
         }
         if (validaDiSI(l,c,e)){
-            for (i=l,j=c-2;i<8 && j<=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;i++,j--){
+            for (i=l,j=c-2;i<8 && j<=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i++,j--){
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
@@ -169,13 +169,13 @@ void virapecas(int l,int c,ESTADO *e){
     }
     if (validaDiP(l,c,e)){
         if (validaDiPS(l,c,e)){
-            for(i=l-2,j=c-2;i>=0 && j>=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;i--,j--) {
+            for(i=l-2,j=c-2;i>=0 && j>=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i--,j--) {
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
         }
         if (validaDiPI(l,c,e)){
-            for (i=l,j=c;i<8 && j<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;i++,j++){
+            for (i=l,j=c;i<8 && j<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i++,j++){
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
@@ -183,13 +183,13 @@ void virapecas(int l,int c,ESTADO *e){
     }
     if (validaVert(l,c,e)){
         if (validaVertC(l,c,e)){
-            for(i=l-2,j=c-1;i>=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;i--) {
+            for(i=l-2,j=c-1;i>=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i--) {
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
         }
         if (validaVertB(l,c,e)){
-            for (i=l,j=c-1;i<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;i++){
+            for (i=l,j=c-1;i<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i++){
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
@@ -197,13 +197,13 @@ void virapecas(int l,int c,ESTADO *e){
     }
     if (validaHoriz(l,c,e)){
         if (validaHorizE(l,c,e)){
-            for (i=l-1,j=c-2;j>=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;j--){
+            for (i=l-1,j=c-2;j>=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;j--){
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
         }
         if (validaHorizD(l,c,e)){
-            for (i=l-1,j=c;j<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA;j++){
+            for (i=l-1,j=c;j<8 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;j++){
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
@@ -225,6 +225,6 @@ void jogada(int l,int c,ESTADO *e){
         if (e->peca==VALOR_X) e->peca=VALOR_O;
         else if (e->peca==VALOR_O) e->peca=VALOR_X;
     }
-    else printf("Jogada inválida!\n");
+    else printf("JOGADA INVÁLIDA! | ");
 }
 

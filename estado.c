@@ -34,6 +34,9 @@ void printa(ESTADO *e)
                     c = '-';
                     break;
                 }
+                case PONTO:
+                    c = '.';
+                    break;
             }
             printf("%c ", c);
         }
@@ -47,20 +50,27 @@ void alteraEstado(ESTADO *e, char *r) {
     printf("Introduza um comando:");
     fgets(r,256,stdin);
         if (r[0]=='N' && r[2]=='X') {
+            printf("JOGO INICIADO! | ");
             e->modo='m'; e->peca=VALOR_X;
         }
         if (r[0]=='N' && r[2]=='O') {
+            printf("JOGO INICIADO! | ");
             e->modo='m';e->peca=VALOR_O;
         }
         if (r[0]=='A' && r[2]=='X') {
+            printf("JOGO INICIADO! | ");
             e->modo='b';e->peca=VALOR_X;
         }
-        if (r[0]=='J') {
+        if (r[0]=='J' && e->modo!='v') { //só entra neste caso se o modo de jogo já tiver sido selecionado
             for (i=1;i<9;i++){if (r[2]==i+48) l=i;}
             for (i=1;i<9;i++){if (r[4]==i+48) c=i;}
             if (l!=0 && c!=0) jogada(l,c,e);
             else printf("Coordenadas inválidas!\n");
         }
-        printa(e);
+        if (r[0]=='S' && e->modo!='v') {
+            jvalidas(e);
+        }
+        if (r[0]!='Q') printa(e);
+        tiraPontos(e);
     }
 

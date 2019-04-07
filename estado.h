@@ -16,7 +16,7 @@ Definição do estado i.e. tabuleiro. Representação matricial do tabuleiro.
 
 
 // definição de valores possiveis no tabuleiro
-typedef enum {VAZIA, VALOR_X, VALOR_O} VALOR;
+typedef enum {VAZIA, PONTO, VALOR_X, VALOR_O} VALOR;
 
 /**
 Estrutura que armazena o estado do jogo
@@ -44,6 +44,8 @@ int validaDiSS(int l,int c,ESTADO *e);
 int validaDiSI(int l,int c,ESTADO *e);
 int validaDiS(int l,int c,ESTADO *e);
 int valida(int l,int c,ESTADO *e);
+void jvalidas(ESTADO *e);
+void tiraPontos(ESTADO *e);
 
 
 #endif //PROJ_ESTADO_H
