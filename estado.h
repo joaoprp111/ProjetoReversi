@@ -24,7 +24,9 @@ Estrutura que armazena o estado do jogo
 typedef struct estado {
     VALOR peca; // peça do jogador que vai jogar!
     VALOR grelha[8][8];
-    char modo; // modo em que se está a jogar! 'm'-> manual, 'b'-> contra bot
+    char modo; // modo em que se está a jogar! 'm'-> manual, 'b'-> contra bot, 'v'->vazio(sem modo implementado)
+    int contagem;
+    int j; // verifica se o jogo está a decorrer ou não
 } ESTADO;
 
 
@@ -45,7 +47,12 @@ int validaDiSI(int l,int c,ESTADO *e);
 int validaDiS(int l,int c,ESTADO *e);
 int valida(int l,int c,ESTADO *e);
 void jvalidas(ESTADO *e);
+int quantasValidas(ESTADO *e);
+int tabuleirocheio(ESTADO *e);
+void resetaTabuleiro(ESTADO *e);
 void tiraPontos(ESTADO *e);
+int contaO(ESTADO *e);
+int contaX(ESTADO *e);
 
 
 #endif //PROJ_ESTADO_H

@@ -3,6 +3,6 @@ project(proj C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(proj main.c estado.h estado.c jogadas.c sugereJogadas.c)
+add_executable(proj main.c estado.h estado.c jogadas.c sugereJogadas.c scoreboard.c)
 
 target_link_libraries(proj m)

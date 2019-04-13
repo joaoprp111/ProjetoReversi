@@ -11,6 +11,16 @@ void jvalidas(ESTADO *e){
     }
 }
 
+int quantasValidas(ESTADO *e) {
+    int i, j, c=0;
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            if (e->grelha[i][j] == VAZIA && valida(i+1,j+1,e)) c++;
+        }
+    }
+    return c;
+}
+
 void tiraPontos(ESTADO *e){
     int i,j;
     for (i=0;i<8;i++){

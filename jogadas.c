@@ -2,6 +2,16 @@
 #include "estado.h"
 #include <string.h>
 
+int tabuleirocheio(ESTADO *e){
+    int i,j,cheio=1;
+    for(i=0;i<8 && cheio;i++){
+        for(j=0;j<8 && cheio;j++){
+            if (e->grelha[i][j]==VAZIA || e->grelha[i][j]==PONTO) cheio=0;
+        }
+    }
+    return cheio;
+}
+
 //VALIDAR JOGADAS NA VERTICAL-INICIO
 
 int validaVertC(int l,int c,ESTADO *e) {
@@ -15,6 +25,7 @@ int validaVertC(int l,int c,ESTADO *e) {
         if (e->grelha[i][c-1]==e->peca) foundPeca = 1;
         i--;
     }
+    if (livreC && !foundPeca) livreC=0;
     return livreC;
 }
 
@@ -29,6 +40,7 @@ int validaVertB(int l,int c,ESTADO *e){
         if (e->grelha[i][c-1]==e->peca) foundPeca=1;
         i++;
     }
+    if (livreB && !foundPeca) livreB=0;
     return livreB;
 }
 
@@ -52,6 +64,7 @@ int validaHorizE(int l,int c,ESTADO *e){
         if (e->grelha[l-1][i]==e->peca) foundPeca=1;
         i--;
     }
+    if(livreE && !foundPeca) livreE=0;
     return livreE;
 }
 
@@ -66,6 +79,7 @@ int validaHorizD(int l,int c,ESTADO *e){
         if (e->grelha[l-1][i]==e->peca) foundPeca=1;
         i++;
     }
+    if(livreD && !foundPeca)livreD=0;
     return livreD;
 }
 
@@ -87,6 +101,7 @@ int validaDiPS(int l,int c,ESTADO *e){
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i--;j--;
     }
+    if(livreS && !foundPeca)livreS=0;
     return livreS;
 }
 
@@ -100,6 +115,7 @@ int validaDiPI(int l,int c,ESTADO *e){
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i++;j++;
     }
+    if(livreI && !foundPeca)livreI=0;
     return livreI;
 }
 
@@ -121,6 +137,7 @@ int validaDiSS(int l,int c,ESTADO *e){
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i--;j++;
     }
+    if(livreS && !foundPeca)livreS=0;
     return livreS;
 }
 
@@ -134,6 +151,7 @@ int validaDiSI(int l,int c,ESTADO *e){
         if (e->grelha[i][j]==e->peca) foundPeca=1;
         i++;j--;
     }
+    if(livreI && !foundPeca)livreI=0;
     return livreI;
 }
 
@@ -161,7 +179,7 @@ void virapecas(int l,int c,ESTADO *e){
             }
         }
         if (validaDiSI(l,c,e)){
-            for (i=l,j=c-2;i<8 && j<=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i++,j--){
+            for (i=l,j=c-2;i<8 && j>=0 && e->grelha[i][j]!=e->peca && e->grelha[i][j]!=VAZIA && e->grelha[i][j]!=PONTO;i++,j--){
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_X) e->grelha[i][j]=VALOR_X;
                 if (e->grelha[i][j]!=e->peca && e->peca==VALOR_O) e->grelha[i][j]=VALOR_O;
             }
@@ -226,5 +244,6 @@ void jogada(int l,int c,ESTADO *e){
         else if (e->peca==VALOR_O) e->peca=VALOR_X;
     }
     else printf("JOGADA INVÁLIDA! | ");
+    e->contagem++;
 }
 
