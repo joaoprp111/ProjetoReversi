@@ -1,5 +1,6 @@
 #include "estado.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int contaX(ESTADO *e){
     int i,j,c=0;

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "estado.h"
 #include <string.h>
+#include <stdlib.h>
 
 int tabuleirocheio(ESTADO *e){
     int i,j,cheio=1;

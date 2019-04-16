@@ -1,13 +1,9 @@
 //
 // Created by pja on 27/02/2019.
 //
-
-
-
 #ifndef PROJ_ESTADO_H
 #define PROJ_ESTADO_H
-
-
+#include <stdio.h>
 
 /**
 estado.h
@@ -24,14 +20,15 @@ Estrutura que armazena o estado do jogo
 typedef struct estado {
     VALOR peca; // peça do jogador que vai jogar!
     VALOR grelha[8][8];
-    char modo; // modo em que se está a jogar! 'm'-> manual, 'b'-> contra bot, 'v'->vazio(sem modo implementado)
+    char modo; // modo em que se está a jogar! 'M'-> manual, 'A'-> contra bot, 'v'->vazio(sem modo implementado)
     int contagem;
     int j; // verifica se o jogo está a decorrer ou não
 } ESTADO;
 
-
+void abertura();
+void estadoinicial(ESTADO *e);
 void printa(ESTADO *e);
-void alteraEstado(ESTADO *e, char *r);
+void alteraEstado(ESTADO *e, char *r,FILE *f);
 void jogada(int l,int c,ESTADO *e);
 int validaVertC(int l,int c,ESTADO *e);
 int validaVertB(int l,int c,ESTADO *e);
@@ -53,6 +50,11 @@ void resetaTabuleiro(ESTADO *e);
 void tiraPontos(ESTADO *e);
 int contaO(ESTADO *e);
 int contaX(ESTADO *e);
+void writef(FILE *f,ESTADO *e,char *r);
+void readf(FILE *f,ESTADO *e,char *r);
+void finalJogo1(ESTADO *e);
+void finalJogo2(ESTADO *e);
+void alteraJogo(ESTADO *e,char *read,FILE *fptr);
 
 
 #endif //PROJ_ESTADO_H

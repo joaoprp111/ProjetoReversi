@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "estado.h"
 #include <string.h>
+#include <stdlib.h>
 
 void jvalidas(ESTADO *e){
     int i,j;
@@ -29,5 +30,12 @@ void tiraPontos(ESTADO *e){
         }
     }
 }
+
+/*void sugere(ESTADO *e){
+    if (quantasValidas(e)!=0){
+
+    }
+
+}*/
 
 
