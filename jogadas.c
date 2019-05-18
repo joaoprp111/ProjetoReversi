@@ -3,11 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 
-int tabuleirocheio(ESTADO *e){
+int tabuleirocheio(ESTADO e){
     int i,j,cheio=1;
     for(i=0;i<8 && cheio;i++){
         for(j=0;j<8 && cheio;j++){
-            if (e->grelha[i][j]==VAZIA || e->grelha[i][j]==PONTO) cheio=0;
+            if (e.grelha[i][j]==VAZIA || e.grelha[i][j]==PONTO) cheio=0;
         }
     }
     return cheio;
@@ -232,19 +232,30 @@ void virapecas(int l,int c,ESTADO *e){
 
 // VIRAR AS PECAS-FIM
 
-void jogada(int l,int c,ESTADO *e){
-    int i,j;
-    if (valida(l,c,e)) {
-        for(i=0;i<8;i++){
-            for(j=0;j<8;j++){
-                if (i==l-1 && j==c-1) e->grelha[i][j]=e->peca;
+void jogada(ESTADO *e,char *comando){
+    int i,j,l,c;
+    l=c=0;
+        for (i = 1; i < 9; i++) { if (comando[2] == i + 48) l = i; }
+        for (i = 1; i < 9; i++) { if (comando[4] == i + 48) c = i; }
+        if (l != 0 && c != 0){
+            if (valida(l,c,e) && (e->grelha[l-1][c-1]==VAZIA || e->grelha[l-1][c-1]==PONTO)) {
+                for(i=0;i<8;i++){
+                    for(j=0;j<8;j++){
+                        if (i==l-1 && j==c-1) e->grelha[i][j]=e->peca;
+                    }
+                }
+                virapecas(l,c,e);
+                if (e->peca==VALOR_X) e->peca=VALOR_O;
+                else if (e->peca==VALOR_O) e->peca=VALOR_X;
+                push(*e);
+                if (e->modo=='1'){
+                    printa(*e);
+                    printf("VOCÊ JOGOU!\n");
+                    jogaBot(e);
+                }
             }
+            else printf("JOGADA INVÁLIDA!\n");
         }
-        virapecas(l,c,e);
-        if (e->peca==VALOR_X) e->peca=VALOR_O;
-        else if (e->peca==VALOR_O) e->peca=VALOR_X;
     }
-    else printf("JOGADA INVÁLIDA! | ");
-    e->contagem++;
-}
+
 
